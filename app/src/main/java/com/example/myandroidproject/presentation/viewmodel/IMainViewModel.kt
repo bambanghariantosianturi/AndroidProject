@@ -1,10 +1,14 @@
 package com.example.myandroidproject.presentation.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.myandroidproject.core.data.Resource
-import com.example.myandroidproject.core.domain.model.genremoviemodel.GenreItemModel
+import com.example.myandroidproject.core.domain.model.listpokemonmodel.ListPokemonModel
+import kotlinx.coroutines.Job
 
 interface IMainViewModel {
 
-    fun getGenreMovie(): LiveData<Resource<List<GenreItemModel>>>
+    fun getListData(): Job
+
+    fun getListLiveData(): LiveData<ListPokemonModel>
+
+    fun errorListLiveData(): LiveData<String>
 }

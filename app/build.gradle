@@ -24,6 +24,7 @@ android {
         buildConfigField "String", "API_KEY", MOVIE_API_KEY
         buildConfigField "String", "BASE_URL", BASE_URL
         buildConfigField "String", "IMG_URL", IMG_URL
+        buildConfigField "String", "BASE_URL_POKEMON", BASE_URL_POKEMON
     }
 
     buildTypes {
@@ -59,7 +60,6 @@ dependencies {
     implementation project(":core")
     api project(":kit")
     api project(":detail")
-    api project(":list")
 
     tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach{
         kotlinOptions{

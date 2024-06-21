@@ -6,13 +6,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import com.example.myandroidproject.detail.ui.DetailActivity
 import com.example.myandroidproject.kit.navigation.CrossModuleNavigator
+import com.example.myandroidproject.kit.navigation.CrossModuleNavigatorProvider
 import kotlin.reflect.KClass
 
 class CrossModuleRouter : CrossModuleNavigator {
 
     companion object {
         private var instance: CrossModuleRouter? = null
-
         fun getInstance(): CrossModuleRouter {
             if (instance == null) {
                 instance = CrossModuleRouter()

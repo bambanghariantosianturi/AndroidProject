@@ -47,7 +47,7 @@
                 android:paddingTop="8dp"/>
 
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tv_title_movie"
+            android:id="@+id/tv_title_activity"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"

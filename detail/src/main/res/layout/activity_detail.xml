@@ -4,10 +4,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_gravity="center"
     tools:context=".ui.DetailActivity">
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/iv_detail_movie"
+        android:id="@+id/iv_detail_activity"
         android:layout_width="match_parent"
         android:layout_height="260dp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,7 +18,7 @@
         android:scaleType="centerCrop" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_title_movie"
+        android:id="@+id/tv_title_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -26,12 +27,44 @@
         android:singleLine="false"
         android:textSize="18sp"
         android:gravity="center"
+        android:textStyle="bold"
+        android:textAllCaps="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/iv_detail_movie" />
+        app:layout_constraintTop_toBottomOf="@+id/iv_detail_activity" />
 
     <androidx.appcompat.widget.AppCompatTextView
-        android:id="@+id/tv_desc_movie"
+        android:id="@+id/tv_weight"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textColor="@android:color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/tv_height"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_activity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_height"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tv_weight"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title_activity" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_ability_info"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
@@ -40,18 +73,47 @@
         android:gravity="center"
         android:inputType="textMultiLine"
         android:singleLine="false"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:text="Ability"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_movie" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_height" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_movie_trailer"
-        android:layout_width="match_parent"
+        android:id="@+id/rv_ability"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_desc_movie"/>
+        app:layout_constraintTop_toBottomOf="@+id/tv_ability_info"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:inputType="textMultiLine"
+        android:singleLine="false"
+        android:textAllCaps="true"
+        android:textStyle="bold"
+        android:text="Type"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rv_ability" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_type"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_type"/>
 
     <ProgressBar
         android:id="@+id/pb_detail_movie"

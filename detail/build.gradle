@@ -21,6 +21,7 @@ android {
         buildConfigField "String", "API_KEY", MOVIE_API_KEY
         buildConfigField "String", "BASE_URL", BASE_URL
         buildConfigField "String", "IMG_URL", IMG_URL
+        buildConfigField "String", "BASE_URL_POKEMON", BASE_URL_POKEMON
     }
 
     buildTypes {

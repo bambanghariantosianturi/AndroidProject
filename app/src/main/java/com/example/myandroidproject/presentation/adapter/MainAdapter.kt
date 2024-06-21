@@ -5,17 +5,18 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.myandroidproject.core.R
 import com.example.myandroidproject.core.databinding.ItemListUserBinding
-import com.example.myandroidproject.core.domain.model.genremoviemodel.GenreItemModel
+import com.example.myandroidproject.core.domain.model.listpokemonmodel.ItemPokemonModel
 
 
-class GenreAdapter : RecyclerView.Adapter<GenreAdapter.ListViewHolder>() {
-    private var listData = ArrayList<GenreItemModel>()
-    var onItemClick: ((GenreItemModel) -> Unit)? = null
+class MainAdapter : RecyclerView.Adapter<MainAdapter.ListViewHolder>() {
+    private var listData = ArrayList<ItemPokemonModel>()
+    var onItemClick: ((ItemPokemonModel) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setDataGenre(data: List<GenreItemModel>?) {
+    fun setDataItems(data: List<ItemPokemonModel>?) {
         if (data == null) return
         listData.clear()
         listData.addAll(data)
@@ -39,8 +40,18 @@ class GenreAdapter : RecyclerView.Adapter<GenreAdapter.ListViewHolder>() {
 
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val binding = ItemListUserBinding.bind(itemView)
-        fun bind(data: GenreItemModel) {
+        fun bind(data: ItemPokemonModel) {
+            val numberPokemon = extractNumberFromUrl(data.url)
             binding.tvName.text = data.name
+            Glide.with(binding.root.context)
+                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$numberPokemon.png")
+                .placeholder(R.drawable.ic_movies_24)
+                .into(binding.ivIcon)
+        }
+
+        private fun extractNumberFromUrl(url: String): Int? {
+            val parts = url.split("/")
+            return parts.getOrNull(parts.size - 2)?.toIntOrNull()
         }
 
         init {

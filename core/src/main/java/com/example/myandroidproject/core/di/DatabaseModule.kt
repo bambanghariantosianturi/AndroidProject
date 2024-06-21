@@ -2,8 +2,8 @@ package com.example.myandroidproject.core.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.myandroidproject.core.data.source.local.room.UserDao
-import com.example.myandroidproject.core.data.source.local.room.UserDatabase
+import com.example.myandroidproject.core.data.source.local.room.DataDao
+import com.example.myandroidproject.core.data.source.local.room.MainDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -17,11 +17,11 @@ class DatabaseModule {
 
     @Singleton
     @Provides
-    fun provideDatabase(@ApplicationContext context: Context): UserDatabase = Room.databaseBuilder(
+    fun provideDatabase(@ApplicationContext context: Context): MainDatabase = Room.databaseBuilder(
         context,
-        UserDatabase::class.java, "user.db"
+        MainDatabase::class.java, "data.db"
     ).fallbackToDestructiveMigration().build()
 
     @Provides
-    fun provideUserDao(database: UserDatabase): UserDao = database.userDao()
+    fun provideUserDao(database: MainDatabase): DataDao = database.dataDao()
 }

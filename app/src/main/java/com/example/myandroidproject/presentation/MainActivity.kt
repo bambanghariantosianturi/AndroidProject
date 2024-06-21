@@ -8,13 +8,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import com.example.myandroidproject.core.data.Resource
-import com.example.myandroidproject.core.domain.model.genremoviemodel.GenreItemModel
+import com.example.myandroidproject.core.commonconstant.CommonConstant
+import com.example.myandroidproject.core.domain.model.listpokemonmodel.ItemPokemonModel
 import com.example.myandroidproject.databinding.ActivityMainBinding
+import com.example.myandroidproject.detail.ui.DetailActivity
 import com.example.myandroidproject.kit.gone
 import com.example.myandroidproject.kit.visible
-import com.example.myandroidproject.list.ui.ListMovieActivity
-import com.example.myandroidproject.presentation.adapter.GenreAdapter
+import com.example.myandroidproject.presentation.adapter.MainAdapter
 import com.example.myandroidproject.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -23,63 +23,48 @@ class MainActivity : AppCompatActivity(), IMainActivity {
 
     private lateinit var binding: ActivityMainBinding
     private val mainViewModel: MainViewModel by viewModels()
-    private val genreAdapter by lazy { GenreAdapter() }
+
+    private val mainAdapter by lazy { MainAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         supportActionBar?.hide()
         setUpView()
         observeData()
     }
 
+    override fun onStart() {
+        super.onStart()
+        mainViewModel.getListData()
+    }
+
     override fun setUpView() {
-        with(binding.rvUser) {
+        with(binding.rvMain) {
             this.layoutManager = LinearLayoutManager(this@MainActivity, VERTICAL, false)
             this.setHasFixedSize(true)
-            this.adapter = genreAdapter
+            this.adapter = mainAdapter
         }
 
-        genreAdapter.onItemClick = { selectData ->
+        mainAdapter.onItemClick = { selectData ->
             moveToListMovie(selectData)
         }
     }
 
     override fun observeData() {
-        mainViewModel.getGenreMovie().observe(this, Observer {
-            if (it != null) {
-                when (it) {
-                    is Resource.Loading -> {
-                        binding.apply {
-                            pbGenreMovie.visible()
-                            rvUser.gone()
-                        }
-                    }
-
-                    is Resource.Success -> {
-                        binding.apply {
-                            pbGenreMovie.gone()
-                            rvUser.visible()
-                        }
-                        genreAdapter.setDataGenre(it.data)
-                        Toast.makeText(this, "Success get genre data", Toast.LENGTH_SHORT)
-                            .show()
-                    }
-
-                    is Resource.Error -> {
-                        Toast.makeText(this, "Error get genre data", Toast.LENGTH_SHORT).show()
-                    }
-                }
-            }
+        mainViewModel.getListLiveData().observe(this, Observer {
+            binding.pbMainActivity.gone()
+            binding.rvMain.visible()
+            mainAdapter.setDataItems(it.results)
+            Toast.makeText(this, "Success get genre data", Toast.LENGTH_SHORT).show()
         })
     }
 
-    private fun moveToListMovie(selectData: GenreItemModel) {
+    private fun moveToListMovie(selectData: ItemPokemonModel) {
         val bundle = Bundle()
-        bundle.putInt(ListMovieActivity.GENRE_MOVIE_ID, selectData.id)
-        val intent = Intent(this@MainActivity, ListMovieActivity::class.java)
+        bundle.putString(CommonConstant.POKEMON_NAME, selectData.name)
+        val intent = Intent(this@MainActivity, DetailActivity::class.java)
         intent.putExtras(bundle)
         startActivity(intent)
     }

@@ -1,35 +1,37 @@
 package com.example.myandroidproject.core.domain.usecase
 
-import android.icu.text.RelativeDateTimeFormatter.RelativeDateTimeUnit
-import androidx.lifecycle.LiveData
-import com.example.myandroidproject.core.data.Resource
-import com.example.myandroidproject.core.domain.model.detailmoviemodel.DetailMovie
-import com.example.myandroidproject.core.domain.model.genremoviemodel.GenreItemModel
-import com.example.myandroidproject.core.domain.model.listmoviesmodel.MovieItemModel
-import com.example.myandroidproject.core.domain.model.movietrailermodel.MovieTrailerItemModel
+import com.example.myandroidproject.core.data.Result
+import com.example.myandroidproject.core.domain.model.detailpokemonmodel.DetailPokemonModel
+import com.example.myandroidproject.core.domain.model.listpokemonmodel.ListPokemonModel
 import com.example.myandroidproject.core.domain.repository.IDataRepository
 import javax.inject.Inject
 
 class DataInteractor @Inject constructor(private val dataRepository: IDataRepository) :
     DataUseCase {
 
-    override fun getMovieList(page: Int, genreId: Int): LiveData<Resource<List<MovieItemModel>>> {
-        return dataRepository.getMovieListData(page = page, genreId = genreId)
+    override suspend fun getDetailPokemon(pokemonName: String): Result<DetailPokemonModel> {
+        return try {
+            val result = dataRepository.getDetailPokemon(pokemonName)
+            if (result?.data != null) {
+                Result.Success(DetailPokemonModel(result.data))
+            } else {
+                Result.Error(result?.message.orEmpty())
+            }
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
     }
 
-    override fun getDetailMovieData(movieId: Int): LiveData<Resource<DetailMovie>> {
-        return dataRepository.getDetailMovieData(movieId)
+    override suspend fun getGenreMovie(): Result<ListPokemonModel> {
+        return try {
+            val result = dataRepository.getListData()
+            if (result?.data != null) {
+                Result.Success(ListPokemonModel(result.data))
+            } else {
+                Result.Error(result?.message.orEmpty())
+            }
+        } catch (e: Exception) {
+            Result.Error(e.message.toString())
+        }
     }
-
-    override fun getGenreMovie(): LiveData<Resource<List<GenreItemModel>>> {
-        return dataRepository.getGenreMovieData()
-    }
-
-    override fun getMovieTrailer(movieId: Int): LiveData<Resource<List<MovieTrailerItemModel>>> {
-        return dataRepository.getMovieTrailer(movieId)
-    }
-
-    override fun getPage(): Int = dataRepository.getPage()
-
-    override fun getTotalPage(): Int = dataRepository.getTotalPage()
 }

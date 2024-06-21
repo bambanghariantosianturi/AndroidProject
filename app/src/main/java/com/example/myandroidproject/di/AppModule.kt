@@ -2,6 +2,8 @@ package com.example.myandroidproject.di
 
 import com.example.myandroidproject.core.domain.usecase.DataInteractor
 import com.example.myandroidproject.core.domain.usecase.DataUseCase
+import com.example.myandroidproject.presentation.viewmodel.IMainViewModel
+import com.example.myandroidproject.presentation.viewmodel.MainViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

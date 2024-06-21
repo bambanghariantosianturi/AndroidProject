@@ -1,13 +1,13 @@
 package com.example.myandroidproject.detail.viewmodel
 
 import androidx.lifecycle.LiveData
-import com.example.myandroidproject.core.data.Resource
-import com.example.myandroidproject.core.domain.model.detailmoviemodel.DetailMovie
-import com.example.myandroidproject.core.domain.model.movietrailermodel.MovieTrailerItemModel
+import com.example.myandroidproject.core.domain.model.detailpokemonmodel.DetailPokemonModel
+import kotlinx.coroutines.Job
 
 interface IDetailViewModel {
+    fun getDetailPokemon(namePokemon: String): Job
 
-    fun getDetailMovieData(movieId: Int): LiveData<Resource<DetailMovie>>
+    fun getDetailPokemonLiveData(): LiveData<DetailPokemonModel>
 
-    fun getMovieTrailer(movieId: Int): LiveData<Resource<List<MovieTrailerItemModel>>>
+    fun errorDetailPokemonLiveData(): LiveData<String>
 }
