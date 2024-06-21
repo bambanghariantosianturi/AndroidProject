@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class RemoteDataSource @Inject constructor(private val apiService: ApiService) {
-    suspend fun getGenre(): Response<ListPokemonResponse> {
+    suspend fun getListData(): Response<ListPokemonResponse> {
         return apiService.getListData()
     }
 

@@ -15,7 +15,7 @@ class DataRepository @Inject constructor(
 ) : IDataRepository {
 
     override suspend fun getListData(): Resource<ListPokemonResponse>? {
-        val response = remoteDataSource.getGenre()
+        val response = remoteDataSource.getListData()
         return try {
             response.body()?.let { Resource.Success(it) }
         } catch (e: Exception) {
