@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity(), IMainActivity {
             binding.pbMainActivity.gone()
             binding.rvMain.visible()
             mainAdapter.setDataItems(it.results)
-            Toast.makeText(this, "Success get genre data", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Success get list data", Toast.LENGTH_SHORT).show()
         })
     }
 

@@ -69,7 +69,7 @@ class DetailActivity : AppCompatActivity(), IDetailActivity {
         binding?.tvTitleActivity?.text = it.name
         binding?.tvHeight?.text = "Height : ${it.height}"
         binding?.tvWeight?.text = "Weight : ${it.weight}"
-        Toast.makeText(this, "Success get detail movie data", Toast.LENGTH_SHORT)
+        Toast.makeText(this, "Success get detail data", Toast.LENGTH_SHORT)
             .show()
 
         showAbilityView(it)
