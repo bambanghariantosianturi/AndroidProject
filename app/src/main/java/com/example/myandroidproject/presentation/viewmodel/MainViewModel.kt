@@ -19,7 +19,7 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val dataUseCase: DataUseCase) : ViewModel(),
     IMainViewModel {
 
-        private val getListLiveData: MutableLiveData<ListPokemonModel> = MutableLiveData()
+    private val getListLiveData: MutableLiveData<ListPokemonModel> = MutableLiveData()
     override fun getListLiveData(): LiveData<ListPokemonModel> = getListLiveData
 
     private val errorListLiveData: SingleLiveEvent<String> = SingleLiveEvent()

@@ -15,6 +15,7 @@ import com.example.myandroidproject.detail.ui.DetailActivity
 import com.example.myandroidproject.kit.gone
 import com.example.myandroidproject.kit.visible
 import com.example.myandroidproject.presentation.adapter.MainAdapter
+import com.example.myandroidproject.presentation.viewmodel.IMainViewModel
 import com.example.myandroidproject.presentation.viewmodel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -22,7 +23,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class MainActivity : AppCompatActivity(), IMainActivity {
 
     private lateinit var binding: ActivityMainBinding
-    private val mainViewModel: MainViewModel by viewModels()
+
+    private val mainViewModel: IMainViewModel by viewModels<MainViewModel>()
 
     private val mainAdapter by lazy { MainAdapter() }
 

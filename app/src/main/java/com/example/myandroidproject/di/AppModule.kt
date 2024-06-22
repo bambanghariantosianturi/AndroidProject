@@ -6,6 +6,7 @@ import com.example.myandroidproject.presentation.viewmodel.IMainViewModel
 import com.example.myandroidproject.presentation.viewmodel.MainViewModel
 import dagger.Binds
 import dagger.Module
+import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ViewModelComponent
 import dagger.hilt.android.scopes.ViewModelScoped

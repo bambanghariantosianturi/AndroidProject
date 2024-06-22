@@ -17,6 +17,7 @@ import com.example.myandroidproject.detail.adapter.AbilityAdapter
 import com.example.myandroidproject.detail.adapter.TypeAdapter
 import com.example.myandroidproject.detail.databinding.ActivityDetailBinding
 import com.example.myandroidproject.detail.viewmodel.DetailViewModel
+import com.example.myandroidproject.detail.viewmodel.IDetailViewModel
 import com.example.myandroidproject.kit.gone
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -34,7 +35,7 @@ class DetailActivity : AppCompatActivity(), IDetailActivity {
     }
 
     private lateinit var binding: ActivityDetailBinding
-    private val detailViewModel: DetailViewModel by viewModels()
+    private val detailViewModel: IDetailViewModel by viewModels<DetailViewModel>()
     private val abilityAdapter by lazy { AbilityAdapter() }
     private val typeAdapter by lazy { TypeAdapter() }
 
