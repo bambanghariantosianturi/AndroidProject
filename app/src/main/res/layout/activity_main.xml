@@ -10,14 +10,16 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_main"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="8dp"
+        android:layout_height="0dp"
+        android:layout_margin="0dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:itemCount="5"
-        tools:listitem="@layout/item_list_user" />
+        tools:listitem="@layout/item_list_movie" />
 
     <ProgressBar
         android:id="@+id/pb_main_activity"

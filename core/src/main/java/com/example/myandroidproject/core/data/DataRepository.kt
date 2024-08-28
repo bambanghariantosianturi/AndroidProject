@@ -3,7 +3,7 @@ package com.example.myandroidproject.core.data
 import com.example.myandroidproject.core.data.source.local.LocalDataSource
 import com.example.myandroidproject.core.data.source.remote.RemoteDataSource
 import com.example.myandroidproject.core.data.source.remote.response.detailpokemonresponse.DetailPokemonResponse
-import com.example.myandroidproject.core.data.source.remote.response.listpokemon.ListPokemonResponse
+import com.example.myandroidproject.core.data.source.remote.response.listnews.ItemNewsResponse
 import com.example.myandroidproject.core.domain.repository.IDataRepository
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -14,7 +14,16 @@ class DataRepository @Inject constructor(
     private val localDataSource: LocalDataSource
 ) : IDataRepository {
 
-    override suspend fun getListData(): Resource<ListPokemonResponse>? {
+//    override suspend fun getListData(): Resource<ListPokemonResponse>? {
+//        val response = remoteDataSource.getListData()
+//        return try {
+//            response.body()?.let { Resource.Success(it) }
+//        } catch (e: Exception) {
+//            Resource.Error(response.errorBody().toString())
+//        }
+//    }
+
+    override suspend fun getListData(): Resource<List<ItemNewsResponse>>? {
         val response = remoteDataSource.getListData()
         return try {
             response.body()?.let { Resource.Success(it) }

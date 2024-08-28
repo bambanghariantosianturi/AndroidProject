@@ -7,16 +7,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.myandroidproject.core.R
-import com.example.myandroidproject.core.databinding.ItemListUserBinding
-import com.example.myandroidproject.core.domain.model.listpokemonmodel.ItemPokemonModel
+import com.example.myandroidproject.core.databinding.ItemListMovieBinding
+import com.example.myandroidproject.core.domain.model.listnewsmodel.ListNewsModel
+import com.example.myandroidproject.kit.getTimeAgo
 
 
 class MainAdapter : RecyclerView.Adapter<MainAdapter.ListViewHolder>() {
-    private var listData = ArrayList<ItemPokemonModel>()
-    var onItemClick: ((ItemPokemonModel) -> Unit)? = null
+    private var listData = ArrayList<ListNewsModel>()
+    var onItemClick: ((ListNewsModel) -> Unit)? = null
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setDataItems(data: List<ItemPokemonModel>?) {
+    fun setDataItems(data: List<ListNewsModel>?) {
         if (data == null) return
         listData.clear()
         listData.addAll(data)
@@ -25,7 +26,7 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ListViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
         return ListViewHolder(
-            LayoutInflater.from(parent.context).inflate(R.layout.item_list_user, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.item_list_movie, parent, false)
         )
     }
 
@@ -38,22 +39,30 @@ class MainAdapter : RecyclerView.Adapter<MainAdapter.ListViewHolder>() {
         return listData.size
     }
 
+    @SuppressLint("NotifyDataSetChanged")
+    fun filter(item: CharSequence?) {
+        if (item.contentEquals("recent", ignoreCase = true)) {
+            listData.sortByDescending { it.timeCreated }
+            notifyDataSetChanged()
+        } else if (item.contentEquals("popular", ignoreCase = true)) {
+            listData.sortBy { it.rank }
+            notifyDataSetChanged()
+        } else {
+            listData
+        }
+    }
+
     inner class ListViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val binding = ItemListUserBinding.bind(itemView)
-        fun bind(data: ItemPokemonModel) {
-            val numberPokemon = extractNumberFromUrl(data.url)
-            binding.tvName.text = data.name
+        private val binding = ItemListMovieBinding.bind(itemView)
+        fun bind(data: ListNewsModel) {
+            binding.tvRating.text = data.title
+            binding.tvTitleActivity.text = data.description
+            binding.tvCreatedDate.text = getTimeAgo(data.timeCreated.toLong())
             Glide.with(binding.root.context)
-                .load("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/$numberPokemon.png")
-                .placeholder(R.drawable.ic_movies_24)
-                .into(binding.ivIcon)
+                .load(data.bannerUrl)
+                .placeholder(R.drawable.ic_news)
+                .into(binding.ivMovie)
         }
-
-        private fun extractNumberFromUrl(url: String): Int? {
-            val parts = url.split("/")
-            return parts.getOrNull(parts.size - 2)?.toIntOrNull()
-        }
-
         init {
             binding.root.setOnClickListener {
                 onItemClick?.invoke(listData[adapterPosition])

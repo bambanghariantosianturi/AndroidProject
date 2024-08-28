@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.myandroidproject.core.data.Result
-import com.example.myandroidproject.core.domain.model.listpokemonmodel.ListPokemonModel
+import com.example.myandroidproject.core.domain.model.listnewsmodel.ListNewsModel
 import com.example.myandroidproject.core.domain.usecase.DataUseCase
 import com.example.myandroidproject.kit.data.SingleLiveEvent
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -19,8 +19,8 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(private val dataUseCase: DataUseCase) : ViewModel(),
     IMainViewModel {
 
-    private val getListLiveData: MutableLiveData<ListPokemonModel> = MutableLiveData()
-    override fun getListLiveData(): LiveData<ListPokemonModel> = getListLiveData
+    private val getListLiveData: MutableLiveData<List<ListNewsModel>> = MutableLiveData()
+    override fun getListLiveData(): LiveData<List<ListNewsModel>> = getListLiveData
 
     private val errorListLiveData: SingleLiveEvent<String> = SingleLiveEvent()
     override fun errorListLiveData(): LiveData<String> = errorListLiveData
@@ -28,7 +28,7 @@ class MainViewModel @Inject constructor(private val dataUseCase: DataUseCase) : 
      override fun getListData(): Job =
         viewModelScope.launch(Dispatchers.Main) {
             val result = withContext(Dispatchers.IO) {
-                dataUseCase.getGenreMovie()
+                dataUseCase.getListData()
             }
 
             when(result) {

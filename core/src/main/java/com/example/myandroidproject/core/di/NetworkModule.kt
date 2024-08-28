@@ -31,7 +31,7 @@ class NetworkModule {
     @Provides
     fun provideApiService(client: OkHttpClient): ApiService {
         val retrofit = Retrofit.Builder()
-            .baseUrl(BuildConfig.BASE_URL_POKEMON)
+            .baseUrl(BuildConfig.BASE_URL_NEWS_APP)
             .addConverterFactory(GsonConverterFactory.create())
             .client(client)
             .build()

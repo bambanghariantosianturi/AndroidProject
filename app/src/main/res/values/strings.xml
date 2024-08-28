@@ -1,5 +1,7 @@
 <resources>
-    <string name="app_name">MyAndroidProject</string>
+    <string name="app_name">Carousell News</string>
     <string name="title_test">Test</string>
     <string name="movie_rating">Rating : %s</string>
+    <string name="recent">Recent</string>
+    <string name="popular">Popular</string>
 </resources>

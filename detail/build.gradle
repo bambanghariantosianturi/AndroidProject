@@ -22,6 +22,7 @@ android {
         buildConfigField "String", "BASE_URL", BASE_URL
         buildConfigField "String", "IMG_URL", IMG_URL
         buildConfigField "String", "BASE_URL_POKEMON", BASE_URL_POKEMON
+        buildConfigField "String", "BASE_URL_NEWS_APP", BASE_URL_NEWS_APP
     }
 
     buildTypes {
